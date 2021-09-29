@@ -1,5 +1,7 @@
+// variables
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
+var taskIdCounter = 0;
 
 // on a button click, create a task
 var taskFormHandler = function (event) {
@@ -32,6 +34,8 @@ var createTaskEl = function (taskDataObj) {
     var listItemEl = document.createElement("li");
     // style it
     listItemEl.className = "task-item";
+    // add task id as a custom attribute
+    listItemEl.setAttribute("data-task-id", taskIdCounter);
     // create div to hold task info and add to list item
     var taskInfoEl = document.createElement("div");
     // style it
@@ -39,9 +43,10 @@ var createTaskEl = function (taskDataObj) {
     // add HTML content to div
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
     listItemEl.appendChild(taskInfoEl);
-    console.dir(listItemEl);
     // add entire list item to list
     tasksToDoEl.appendChild(listItemEl);
+    // increase task counter for next unique id
+    taskIdCounter++;
 };
 
 // event listener
